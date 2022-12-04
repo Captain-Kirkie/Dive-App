@@ -30,10 +30,12 @@ struct ContentView: View {
         Slider(
             value: $oxygenPercent,
             in: 21...100,
+            step: 1,
             onEditingChanged: { editing in
                 isEditing = editing
             }
-        ).padding()
+            
+        ).padding().tint(.red);
     }
 }
 
@@ -46,9 +48,7 @@ struct ContentView_Previews: PreviewProvider {
 
 
 func calculateMaxDepthFeet(maxPPG: Float, fractionOxygen : Float , unit: Units) -> Float {
-    print("maxPPG \(maxPPG)")
     let pressure = maxPPG / (fractionOxygen / 100);
-    print(pressure);
     let guagePressure = pressure - 1;
     var multiply : Float;
     if(unit == Units.feet) {
@@ -58,5 +58,6 @@ func calculateMaxDepthFeet(maxPPG: Float, fractionOxygen : Float , unit: Units) 
     } else {
         multiply = 0;
     }
-    return guagePressure * multiply; /// 33 feet += one ata
+    let depth = guagePressure * multiply; /// 33 feet += one ata
+    return round(depth * 100) / 100.0;
 }
