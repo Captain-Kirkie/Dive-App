@@ -23,10 +23,9 @@ struct ContentView: View {
     public var maxDepthM = 0.0;
     
     var body: some View {
-      
-        Text("Max Depth with \(oxygenPercent)% O2 is \(calculateMaxDepthFeet(maxPPG: maxPPG, fractionOxygen: oxygenPercent, unit: Units.feet)) ft").padding();
+        Text("Max Depth with \(oxygenPercent, specifier: "%.2f")% O2 is \(calculateMaxDepthFeet(maxPPG: maxPPG, fractionOxygen: oxygenPercent, unit: Units.feet), specifier: "%.2f") ft").padding();
         
-        Text("Max Depth with \(oxygenPercent)% O2 is \(calculateMaxDepthFeet(maxPPG: maxPPG, fractionOxygen: oxygenPercent, unit: Units.metres)) M").padding();
+        Text("Max Depth with \(oxygenPercent, specifier: "%.2f")% O2 is \(calculateMaxDepthFeet(maxPPG: maxPPG, fractionOxygen: oxygenPercent, unit: Units.metres), specifier: "%.2f") M").padding();
         Slider(
             value: $oxygenPercent,
             in: 21...100,
@@ -34,7 +33,6 @@ struct ContentView: View {
             onEditingChanged: { editing in
                 isEditing = editing
             }
-            
         ).padding().tint(.red);
     }
 }
